@@ -8,5 +8,5 @@ data class Movie(
     val year: Int,
     val genre: String,
     val overview: String,
-    val poster:String,
+    val poster:String
 )

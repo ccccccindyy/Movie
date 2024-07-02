@@ -13,14 +13,16 @@
 
         <action
             android:id="@+id/action_SearchFragment_to_DetailFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/MovieDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.netgear.homework.movie.SecondFragment"
+        android:id="@+id/MovieDetailFragment"
+        android:name="com.netgear.homework.movie.detail.MovieDetailFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/SearchFragment" />

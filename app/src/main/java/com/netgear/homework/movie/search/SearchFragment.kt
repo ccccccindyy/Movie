@@ -61,7 +61,14 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun onMovieClicked(movieSearchResult: MovieSearchResult) { findNavController().navigate(R.id.action_SearchFragment_to_DetailFragment) }
+    private fun onMovieClicked(movieSearchResult: MovieSearchResult) {
+        findNavController().run {
+//            currentBackStackEntry?.savedStateHandle?.set("movieId", movieSearchResult.id)
+//            navigate(R.id.action_SearchFragment_to_DetailFragment)
+            val action = SearchFragmentDirections.actionSearchFragmentToDetailFragment(movieSearchResult.id)
+            this.navigate(action)
+        }
+    }
 
     private fun hideKeyboard() {
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

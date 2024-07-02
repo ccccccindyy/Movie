@@ -58,5 +58,7 @@ open class MovieApiDataSource<T> {
 
     companion object {
         const val BASE_URL = "https://api.themoviedb.org/3/"
+        const val TOKEN = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2Yzc4OTZjYjQ5ZDc4NTQxMzk2NzhmZDRlOTRkYjdkZCIsIm5iZiI6MTcxOTc4MzQ3MS44Njg4ODgsInN1YiI6IjY2ODFjYzVkYTZhMmJkMzFkYmUyNjhlMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9uJ3oagRSknIVByw_pYjav0z0vkjCq56JfQbCQLzuB0"
+
     }
 }
