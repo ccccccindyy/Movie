@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.netgear.homework.movie.R
 import com.netgear.homework.movie.databinding.FragmentDetailBinding
 
 class MovieDetailFragment : Fragment() {
@@ -41,13 +38,17 @@ class MovieDetailFragment : Fragment() {
 
         val movieId = arguments?.let { MovieDetailFragmentArgs.fromBundle(it).movieId } ?: -1
         // Use movieId to call viewModel.fetchData(movieId)
-        viewModel.fetchMovieDetail(movieId)  {it?.let {
-            detailView.displayMovieDetail(it)
-        }}
+        viewModel.fetchMovieDetail(movieId)  {
+            it.let {
+                if(it.isSuccess) {
+                    detailView.displayMovieDetail(it.getOrNull())
+                } else {
+                    // display error message
+                }
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            }
         }
+
     }
 
     override fun onDestroyView() {

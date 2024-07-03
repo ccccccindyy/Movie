@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.netgear.homework.movie.databinding.FragmentSearchBinding
+import com.netgear.homework.movie.repository.data.MovieSearchResponse
 import com.netgear.homework.movie.repository.data.MovieSearchResult
 
 class MovieSearchView {
@@ -27,9 +28,21 @@ class MovieSearchView {
         return _binding.root
     }
 
-    internal fun displaySearchResult(movieSearchResults: List<MovieSearchResult>) {
+    internal fun displaySearchResult(movieSearchResponse: MovieSearchResponse?) {
         searchResult.visibility = View.VISIBLE
-        (searchResult.adapter as? MovieAdapter)?.updateMovies(movieSearchResults)
+        if(movieSearchResponse != null) {
+            (searchResult.adapter as? MovieAdapter)?.updateMovies(movieSearchResponse.results)
+            //do something for pagination here
+        } else {
+            //display empty result message
+            _binding.messagebox.text = "No results found"
+
+        }
+
+    }
+
+    internal fun errorPopup(message: String) {
+        //TODO: display error message
     }
 
     private fun calculateImageSpan(): Int {

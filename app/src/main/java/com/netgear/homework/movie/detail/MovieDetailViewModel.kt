@@ -10,7 +10,7 @@ class MovieDetailViewModel : ViewModel() {
 
     private val movieDetailService = MovieDetailService()
 
-    fun fetchMovieDetail(movieId: Int, displayMovieDetail: (Movie?) -> Unit) {
+    fun fetchMovieDetail(movieId: Int, displayMovieDetail: (Result<Movie?>) -> Unit) {
         viewModelScope.launch {
             movieDetailService.fetchMovieDetails(movieId).run {
                 displayMovieDetail.invoke(this)

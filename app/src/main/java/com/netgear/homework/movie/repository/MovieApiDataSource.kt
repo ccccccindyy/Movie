@@ -30,21 +30,23 @@ open class MovieApiDataSource<T> {
         .client(okHttpClient)
         .build()
 
-    internal suspend fun requestMovieDataSource(apiRequest: () -> Call<T>): T? {
+    internal suspend fun requestMovieDataSource(apiRequest: () -> Call<T>): Result<T?> {
         // Call API
         return suspendCancellableCoroutine { continuation ->
             apiRequest().run {
                 enqueue(object : retrofit2.Callback<T> {
                     override fun onResponse(call: Call<T>, response: retrofit2.Response<T>) {
                         if (response.isSuccessful) {
-                            continuation.resume(response.body())
+                            continuation.resume(Result.success(response.body()))
                         } else {
-                            continuation.resumeWithException(Exception("API request failed with code ${response.code()}"))
+                            //continuation.resumeWithException(Exception("API request failed with code ${response.code()}"))
+                            continuation.resume(Result.failure(Exception("API request failed with code ${response.code()} and message: ${response.message()}")))
                         }
                     }
 
                     override fun onFailure(call: Call<T>, t: Throwable) {
-                        continuation.resumeWithException(t)
+                        //continuation.resumeWithException(t)
+                        continuation.resume(Result.failure(t))
                     }
                 })
 

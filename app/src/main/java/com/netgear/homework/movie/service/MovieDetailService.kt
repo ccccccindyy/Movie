@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class MovieDetailService {
     private val movieDetailRepository = MovieDetailRepository()
-    suspend fun fetchMovieDetails(movieId: Int): Movie? {
+    suspend fun fetchMovieDetails(movieId: Int): Result<Movie?> {
         return withContext(Dispatchers.IO) {
             movieDetailRepository.getMovieDetails(movieId)
         }

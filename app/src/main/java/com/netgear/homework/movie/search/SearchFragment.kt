@@ -48,7 +48,15 @@ class SearchFragment : Fragment() {
                     viewModel.searchForMovie(
                         query
                     ) {
-                        it?.let { searchView.displaySearchResult(it) }
+                        it.let { response ->
+                            if (response.isSuccess) searchView.displaySearchResult(response.getOrNull())
+                            else {
+                                //error handling..
+                                searchView.errorPopup(response.exceptionOrNull().let{t -> t?.message ?: "Unknown Error"})
+
+                            }
+
+                        }
                     }
 
                 }

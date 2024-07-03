@@ -17,13 +17,18 @@ class MovieDetailView {
         return detailView
     }
 
-    internal fun displayMovieDetail(movie: Movie) {
-        detailView.visibility = View.VISIBLE
-        _binding.movieTitle.text = movie.title
-        _binding.movieDate.text = movie.year.toString()
-        _binding.movieGenre.text = movie.genre
-        _binding.movieOverview.text = movie.overview
-        //todo: load image
+    internal fun displayMovieDetail(movie: Movie?) {
+        if(movie != null) {
+            detailView.visibility = View.VISIBLE
+            _binding.movieTitle.text = movie.title
+            _binding.movieDate.text = movie.year.toString()
+            _binding.movieGenre.text = movie.genre
+            _binding.movieOverview.text = movie.overview
+            //todo: load image
+        } else {
+            //fill empty result message
+        }
+
 
 
     }
